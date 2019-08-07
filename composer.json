@@ -1,0 +1,44 @@
+{
+    "name": "rogervila/laravel-autocache",
+    "description": "Automatic Laravel Eloquent Models Cache",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Roger Vilà",
+            "email": "rogervila@me.com"
+        }
+    ],
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelAutoCache\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "laravel/framework": "5.8.x"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.14",
+        "phpunit/phpunit": "^7.5",
+        "rogervila/php-sonarqube-scanner": "^0",
+        "orchestra/testbench": "^3",
+        "swayok/alternative-laravel-cache": "5.4.*"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelAutoCache\\AutoCacheServiceProvider"
+            ]
+        }
+    }
+}

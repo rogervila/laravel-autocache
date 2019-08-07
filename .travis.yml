@@ -1,0 +1,24 @@
+language: php
+
+php:
+  - 7.1
+  - 7.2
+  - 7.3
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_script:
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar install --dev
+
+script:
+  - vendor/bin/phpunit
+  - sonar-scanner -Dsonar.projectKey=rogervila_laravel-autocache -Dsonar.sources=. -Dsonar.exclusions='tmp/**, vendor/**, tests/**, config/**' -Dsonar.php.tests.reportPath=junit-logfile.xml -Dsonar.php.coverage.reportPaths=clover.xml
+
+addons:
+  sonarcloud:
+    organization: "rogervila-github"
+    token:
+      secure: "B/JlMBXc+3CvNh6aZrXZeBnB5hNcRNPOR4khL3/kUGpObWcBOHrfKCooJ825xetLmkpPrvDAvYrxxrO1+k2RWAGCKRxRSy3mYnQ7PT2qLo1i4ky6n9ZJ4ujCjtiKMtJcB1I6EqhDeMqotK9b4XrbEHgAf9k4IjWCUTm/c1oJTEddy6MFUFVuTBuOW3gQqF0Ouj3cXzTMDDgPugD6IrnAbk6Ry0QRFU9fsrUw7GR2YwYncgYEdrW9NP+8tmk2VB6jyHzE1BLTcRKk9lpVoycEsWakb/HaqmyofzvRgXZO/pY0SJk4BXwvDZ7iMoMecjtOfPsxVOP+aP4J6RT7CRZknnhL4hKaXXYuPH7RGO6Uzqf2DZMG01G1su1ASJFdd/b5Nn8fBiuZIZljucIS9ACpQDLELXKM5Most5JAgEaZ7vPlQU65uICloR9EW9MzOdJ2+8mibP/aGuCWXJj9M1Tg+++pmOuDvhmbtY50QIr/R18NRLbn35tjEPukS17KwGYOhIvxq37eo2NyNrVDA2F7rraQGzDZI8HcMer+hrj53XQ1OXV0742dztxVg0OHDZx2qNJpYws7Pjz6Y1kPGk3EcJ20YV0P6MB99dB0GDm6yOfq8Lp/CJvDoe9vLDwJVvWJ0SZrOccpBELDdenjneAm5jGXy6+G56b1ZnectfLeNJQ="
