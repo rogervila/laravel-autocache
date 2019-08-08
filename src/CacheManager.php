@@ -49,14 +49,8 @@ class CacheManager
         }
     }
 
-    public function remember(string $table, string $key, $callback)
+    public function supportsTags(): bool
     {
-        if (method_exists(Cache::getStore(), 'tags')) {
-            return Cache::tags([config('autocache.prefix') . $table])->rememberForever($key, function () use ($callback) {
-                return $callback;
-            });
-        }
-
-        return $callback;
+        return method_exists(Cache::getStore(), 'tags');
     }
 }

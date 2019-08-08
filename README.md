@@ -14,7 +14,107 @@
 
 ## About
 
-Automatic Eloquent Model Cache
+Laravel Autocache package caches Eloquent model 'select' queries.
+
+When a model is modified with [Eloquent methods](https://laravel.com/docs/5.8/eloquent#inserting-and-updating-models), the cache is automatically flushed.
+
+## Example
+
+Imagine that we select all Posts with Categories using [Eager Loading](https://laravel.com/docs/5.8/eloquent-relationships#eager-loading)
+
+```php
+Post::with('categories')->get();
+```
+
+This will generate two queries that will run only once:
+
+```sh
+select * from `posts`
+select * from `categories`
+```
+While no Post or Category model change is applied, the query will be cached.
+
+Now, imagine that we edit the title of our latest post
+
+```php
+$post = Post::find($id);
+$post->update(['title' => 'Your edited title']);
+
+return Post::with('categories')->get();
+```
+
+Only the select query for `posts` table will be executed, since Category model stills cached
+
+```sh
+select * from `categories`
+```
+
+Autocache can be disabled on runtime if necessary
+
+```php
+Post::disableAutoCache();
+
+// Do your database changes here
+
+Post::enableAutoCache();
+
+```
+
+## Installation
+
+Require this package with composer.
+
+```sh
+composer require rogervila/laravel-autocache
+```
+
+If you don't use auto-discovery, add the ServiceProvider to the providers array in config/app.php
+
+```php
+LaravelAutoCache\AutocacheServiceProvider::class,
+```
+
+Now, copy the package config to your project config with the publish command:
+
+```sh
+php artisan vendor:publish --provider=" LaravelAutoCache\AutocacheServiceProvider"
+```
+
+
+## Usage
+
+First, put the models you want to handle into `config/autocache.php` models key.
+
+```php
+/**
+ * List of models that implement autocache by default.
+ * Models have to also implement the Autocache trait
+ * in order to work properly
+ */
+'models' => [
+    App\Product::class,
+],
+```
+
+Then, add the `Autocache` trait on the models listed on the configuration
+
+```php
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use LaravelAutoCache\Autocache;
+
+class Product extends Model
+{
+    use Autocache;
+    ...
+```
+
+## Troubleshooting
+
+#### Autocache does not work on update queries
+
+Check this [Laravel issue comment](https://github.com/laravel/framework/issues/11777#issuecomment-170384117)
 
 ## License
 

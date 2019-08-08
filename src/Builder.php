@@ -2,6 +2,7 @@
 
 namespace LaravelAutoCache;
 
+use Cache;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use LaravelAutoCache\CacheManager;
 
@@ -15,7 +16,9 @@ class Builder extends QueryBuilder
     protected function runSelect()
     {
         if ($this->applies()) {
-            return app(CacheManager::class)->remember($this->from, $this->getCacheKey(), parent::runSelect());
+            return Cache::tags([config('autocache.prefix') . $this->from])->rememberForever($this->getCacheKey(), function () {
+                return parent::runSelect();
+            });
         }
 
         return parent::runSelect();
@@ -24,6 +27,7 @@ class Builder extends QueryBuilder
     protected function applies(): bool
     {
         return request()->isMethod('get')
+            && app(CacheManager::class)->supportsTags()
             && !app(CacheManager::class)->isDisabled($this->from);
     }
 
