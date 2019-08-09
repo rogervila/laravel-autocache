@@ -24,10 +24,14 @@ class Builder extends QueryBuilder
         return parent::runSelect();
     }
 
+    /**
+     * Checks if the select query can be cached.
+     *
+     * @return bool
+     */
     protected function applies(): bool
     {
-        return request()->isMethod('get')
-            && app(CacheManager::class)->supportsTags()
+        return app(CacheManager::class)->supportsTags()
             && !app(CacheManager::class)->isDisabled($this->from);
     }
 
@@ -36,7 +40,7 @@ class Builder extends QueryBuilder
      *
      * @return string
      */
-    protected function getCacheKey()
+    protected function getCacheKey(): string
     {
         // create cache entry 'prefix-table-sha1' with key 'table'
         return config('autocache.prefix') . $this->from . '-' . sha1(config('autocache.key') . $this->toSql() . json_encode($this->getBindings()));
