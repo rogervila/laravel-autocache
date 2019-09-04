@@ -1,7 +1,7 @@
 <p align="center"><img width="128" src="https://image.flaticon.com/icons/svg/83/83880.svg" alt="Laravel Autocache" /></p>
 
 [![Build Status](https://travis-ci.org/rogervila/laravel-autocache.svg?branch=master)](https://travis-ci.org/rogervila/laravel-autocache)
-[![Build status](https://ci.appveyor.com/api/projects/status/3naje594j8rpv3x9?svg=true)](https://ci.appveyor.com/project/roger-vila/laravel-autocache)
+[![Build status](https://ci.appveyor.com/api/projects/status/3naje594j8rpv3x9/branch/master?svg=true)](https://ci.appveyor.com/project/roger-vila/laravel-autocache/branch/master)
 [![StyleCI](https://github.styleci.io/repos/179132676/shield?branch=master)](https://github.styleci.io/repos/179132676)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=rogervila_laravel-autocache&metric=alert_status)](https://sonarcloud.io/dashboard?id=rogervila_laravel-autocache)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=rogervila_laravel-autocache&metric=coverage)](https://sonarcloud.io/dashboard?id=rogervila_laravel-autocache)
