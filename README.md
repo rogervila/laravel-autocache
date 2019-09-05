@@ -32,7 +32,7 @@ This will generate two queries that will run only once:
 select * from `posts`
 select * from `categories`
 ```
-While no Post or Category model change is applied, the query will be cached.
+While no Post or Category model change is applied, both queries will be cached.
 
 Now, imagine that we edit the title of our latest post
 
@@ -46,7 +46,7 @@ return Post::with('categories')->get();
 Only the select query for `posts` table will be executed, since Category model stills cached
 
 ```sh
-select * from `categories`
+select * from `posts`
 ```
 
 Autocache can be disabled on runtime if necessary
