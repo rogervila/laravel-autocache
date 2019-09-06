@@ -31,7 +31,7 @@
         "friendsofphp/php-cs-fixer": "^2.14",
         "phpunit/phpunit": "^7.5 || ^8.0",
         "rogervila/php-sonarqube-scanner": "^0",
-        "orchestra/testbench": "^3",
+        "orchestra/testbench": "^3 || ^4",
         "swayok/alternative-laravel-cache": "^5.4.9"
     },
     "extra": {
