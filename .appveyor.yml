@@ -5,10 +5,9 @@ clone_folder: C:\projects\app
 
 environment:
     matrix:
-        - php_ver: 7.4.3
-        - php_ver: 7.3.15
-        - php_ver: 7.2.28
-        - php_ver: 7.1.26
+        - php_ver: 7.4.11
+        - php_ver: 7.3.23
+        - php_ver: 7.2.34
 
 cache:
     - '%APPDATA%\Composer'
@@ -32,7 +31,7 @@ install:
     - echo extension=php_mbstring.dll >> php.ini
     - echo extension=php_sqlite3.dll >> php.ini
     - echo extension=php_pdo_sqlite.dll >> php.ini
-    - IF NOT EXIST C:\tools\composer.phar (cd C:\tools && appveyor DownloadFile https://getcomposer.org/composer.phar)
+    - IF NOT EXIST C:\tools\composer.phar (cd C:\tools && appveyor DownloadFile https://getcomposer.org/download/1.10.10/composer.phar)
     - php C:\tools\composer.phar --version
     - cd C:\projects\app
 
